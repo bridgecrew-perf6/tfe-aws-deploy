@@ -10,7 +10,8 @@ resource "aws_instance" "tfe-01" {
   }
 
   # the VPC subnet
-  subnet_id = aws_subnet.main-public-01.id
+ #subnet_id = aws_subnet.main-public-01.id
+  subnet_id = module.vpc.public_subnets[0]
 
   # the security group
   vpc_security_group_ids = [aws_security_group.allow-ssh.id]
@@ -25,17 +26,17 @@ resource "aws_instance" "tfe-01" {
     private_key = file("keys/tfe-deploy.pem")
   }
 
- provisioner "file" {
-    source      = "../scripts/updates.sh"
-    destination = "/tmp/updates.sh"
-  }
+#  provisioner "file" {
+#     source      = "../scripts/updates.sh"
+#     destination = "/tmp/updates.sh"
+#   }
 
-  provisioner "remote-exec" {
-    inline = [
-      "chmod +x /tmp/updates.sh",
-      "sudo /tmp/updates.sh"
-    ]
-  }
+#   provisioner "remote-exec" {
+#     inline = [
+#       "chmod +x /tmp/updates.sh",
+#       "sudo /tmp/updates.sh"
+#     ]
+#   }
 
   tags = {
       Name      = "tfe-01"
