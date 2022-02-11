@@ -6,5 +6,10 @@ sudo apt-get -y upgrade
 sudo apt-get -y autoremove
 sudo apt-get -y install unzip curl
 
-#curl https://install.terraform.io/ptfe/stable | sudo bash
+# install docker
+sudo apt install containerd
+containerd --version
+runc --version
 
+# TFE install
+curl https://install.terraform.io/ptfe/stable | sudo bash
