@@ -35,3 +35,6 @@ keys
 *.pem
 *.pub
 
+# ignore TF license
+*.rli
+
