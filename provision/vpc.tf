@@ -79,17 +79,19 @@ module "vpc" {
 
   enable_ipv6 = false
   enable_nat_gateway = false
+  #vpc_enable_dns_hostnames	= true
+  #vpc_enable_dns_support = true
 
   public_subnet_tags = {
     Name = "Public Subnet"
   }
 
   tags = {
-    Owner       = "hc-fto@hashicorp.com"
+    Owner       = "rirving"
     Environment = "training"
   }
 
   vpc_tags = {
-    Name = "Training VPC"
+    Name = "TFE Dev Environment"
   }
 }
