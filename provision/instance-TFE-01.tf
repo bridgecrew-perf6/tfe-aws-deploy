@@ -1,7 +1,7 @@
 
 resource "aws_instance" "tfe-01" {
   ami           = var.AMI_ID
-  instance_type = "t2.micro"
+  instance_type = "t3.xlarge"
 
   root_block_device {
     volume_type           = "gp2"
@@ -26,22 +26,9 @@ resource "aws_instance" "tfe-01" {
     private_key = file("keys/tfe-deploy.pem")
   }
 
-#  provisioner "file" {
-#     source      = "../scripts/updates.sh"
-#     destination = "/tmp/updates.sh"
-#   }
-
-#   provisioner "remote-exec" {
-#     inline = [
-#       "chmod +x /tmp/updates.sh",
-#       "sudo /tmp/updates.sh"
-#     ]
-#   }
-
   tags = {
       Name      = "tfe-01"
       proj      = "tfe-deploy"
   }
-
 
 }
