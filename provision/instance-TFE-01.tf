@@ -9,25 +9,12 @@ resource "aws_instance" "tfe-01" {
     delete_on_termination = "true"
   }
 
-  # the VPC subnet
- #subnet_id = aws_subnet.main-public-01.id
   subnet_id = module.vpc.public_subnets[0]
-
-  # the security group
   vpc_security_group_ids = [aws_security_group.allow-ssh.id]
-
-  # the public SSH key
   key_name = "tfe-deploy"
 
-  connection {
-    type = "ssh"
-    user = "ubuntu"
-    host = self.public_ip
-    private_key = file("keys/tfe-deploy.pem")
-  }
-
   tags = {
-      Name      = "tfe-01"
+      Name      = "tfe-server"
       proj      = "tfe-deploy"
   }
 
